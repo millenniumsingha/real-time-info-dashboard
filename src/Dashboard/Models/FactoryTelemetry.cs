@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace CodeClinic
+namespace RealTimeInfoDashboard.Models;
+
+public class FactoryTelemetry
 {
-    public class FactoryTelemetry
-    {
-        public DateTime TimeStamp { get; set; }
+    public DateTime TimeStamp { get; set; }
         public double Pulse { get; set; }
         public double Efficiency { get; set; }
         public double Red { get; set; }
@@ -60,4 +60,3 @@ namespace CodeClinic
             }
         }
     }
-}
