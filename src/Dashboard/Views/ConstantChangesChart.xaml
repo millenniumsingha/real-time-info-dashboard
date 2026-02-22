@@ -3,11 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              xmlns:local="clr-namespace:RealTimeInfoDashboard.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <!-- UI temporarily disabled for Phase 2 .NET 10 build verification -->
-        <!-- Will be migrated to LiveCharts2 rc6.1 in Phase 3 -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="80*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Row="0" Grid.Column="1" Command="{Binding ToggleDataReadingCommand}">Start/Stop</Button>
+
+        <lvc:PieChart Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" 
+                      Series="{Binding GaugeSeries}"
+                      InitialRotation="-90"
+                      MaxAngle="180">
+        </lvc:PieChart>
+
+        <lvc:CartesianChart Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"
+                            Series="{Binding MainSeries}"
+                            XAxes="{Binding XAxes}"
+                            YAxes="{Binding YAxes}">
+        </lvc:CartesianChart>
+
+        <lvc:CartesianChart Grid.Row="3" Grid.Column="1" Grid.RowSpan="2"
+                            Series="{Binding RgbSeries}"
+                            XAxes="{Binding XAxes}">
+        </lvc:CartesianChart>
     </Grid>
 </UserControl>
