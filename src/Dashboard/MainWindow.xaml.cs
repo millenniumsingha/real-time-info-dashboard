@@ -9,9 +9,10 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+using Microsoft.Extensions.DependencyInjection;
+using RealTimeInfoDashboard.ViewModels;
 
 namespace RealTimeInfoDashboard;
 
@@ -23,5 +24,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        
+        // Resolve ViewModel from DI Container
+        DataContext = App.Current.Services.GetRequiredService<DashboardViewModel>();
     }
 }
