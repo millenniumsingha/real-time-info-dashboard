@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master", "phase/*" ]
+  pull_request:
+    branches: [ "master", "phase/*" ]
+
+jobs:
+  build:
+    name: Build (.NET 10)
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET 10 SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore RealTimeInfoDashboard.slnx
+
+    - name: Build Dashboard
+      run: dotnet build RealTimeInfoDashboard.slnx --configuration Release --no-restore
