@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-
 using Microsoft.Extensions.DependencyInjection;
 using RealTimeInfoDashboard.Services;
 using RealTimeInfoDashboard.ViewModels;
@@ -13,7 +8,8 @@ using RealTimeInfoDashboard.ViewModels;
 namespace RealTimeInfoDashboard;
 
 /// <summary>
-/// Interaction logic for App.xaml
+/// Application root.  Configures the DI container and installs global
+/// exception handlers that write diagnostic logs next to the executable.
 /// </summary>
 public partial class App : Application
 {
@@ -30,12 +26,44 @@ public partial class App : Application
     {
         var services = new ServiceCollection();
 
-        // ViewModels
         services.AddTransient<DashboardViewModel>();
-
-        // Services
         services.AddSingleton<ITelemetryService, TelemetryService>();
 
         return services.BuildServiceProvider();
+    }
+
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
+
+        DispatcherUnhandledException += (_, args) =>
+        {
+            WriteCrashLog("crash.log", args.Exception);
+            args.Handled = true;
+        };
+
+        AppDomain.CurrentDomain.UnhandledException += (_, args) =>
+        {
+            if (args.ExceptionObject is Exception ex)
+                WriteCrashLog("crash_domain.log", ex);
+        };
+
+        TaskScheduler.UnobservedTaskException += (_, args) =>
+        {
+            WriteCrashLog("crash_task.log", args.Exception);
+        };
+    }
+
+    private static void WriteCrashLog(string filename, Exception ex)
+    {
+        try
+        {
+            var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
+            System.IO.File.WriteAllText(path, $"[{DateTime.UtcNow:O}]\n{ex}");
+        }
+        catch
+        {
+            // Last-resort: if we can't write the log, don't crash the crash handler.
+        }
     }
 }

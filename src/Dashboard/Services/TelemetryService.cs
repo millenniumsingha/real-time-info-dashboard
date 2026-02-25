@@ -13,7 +13,7 @@ public class TelemetryService : ITelemetryService
 
     public TelemetryService(string dataFile = @"data\dashBoardData.csv")
     {
-        _dataFile = dataFile;
+        _dataFile = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dataFile);
     }
 
     public async IAsyncEnumerable<FactoryTelemetry> StreamTelemetryAsync([EnumeratorCancellation] CancellationToken cancellationToken = default)
