@@ -1,20 +1,16 @@
-﻿using RealTimeInfoDashboard.Models;
-using System;
-using System.ComponentModel;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace RealTimeInfoDashboard.Views;
 
 /// <summary>
-/// Interaction logic for ConstantChangesChart.xaml
+/// Real-time telemetry chart with an angular gauge and 5-series Cartesian overlay.
+/// All logic is in <see cref="ViewModels.DashboardViewModel"/>; this code-behind
+/// only initialises the XAML component tree.
 /// </summary>
 public partial class ConstantChangesChart : UserControl
 {
-        public ConstantChangesChart()
-        {
-            InitializeComponent();
-        }
+    public ConstantChangesChart()
+    {
+        InitializeComponent();
     }
+}

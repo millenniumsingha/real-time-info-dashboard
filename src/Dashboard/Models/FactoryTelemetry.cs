@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 namespace RealTimeInfoDashboard.Models;
@@ -18,12 +19,12 @@ public class FactoryTelemetry
             var data = line.Split(',');
 
             if (data.Length == 6 &&
-                DateTime.TryParse(data[0], out DateTime timestamp) &&
-                double.TryParse(data[1], out double pulse) &&
-                double.TryParse(data[2], out double engineEfficiency) &&
-                double.TryParse(data[3], out double red) &&
-                double.TryParse(data[4], out double blue) &&
-                double.TryParse(data[5], out double green))
+                DateTime.TryParse(data[0], CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out DateTime timestamp) &&
+                double.TryParse(data[1], NumberStyles.Any, CultureInfo.InvariantCulture, out double pulse) &&
+                double.TryParse(data[2], NumberStyles.Any, CultureInfo.InvariantCulture, out double engineEfficiency) &&
+                double.TryParse(data[3], NumberStyles.Any, CultureInfo.InvariantCulture, out double red) &&
+                double.TryParse(data[4], NumberStyles.Any, CultureInfo.InvariantCulture, out double blue) &&
+                double.TryParse(data[5], NumberStyles.Any, CultureInfo.InvariantCulture, out double green))
             {
                 ft = new FactoryTelemetry()
                 {
