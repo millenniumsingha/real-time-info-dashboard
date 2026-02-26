@@ -8,7 +8,7 @@ The dashboard is a Windows Desktop application built on **.NET 10** and **WPF**.
 
 ```mermaid
 graph TD
-    UI[WPF UI Layer\n(MainWindow.xaml)] -->|Data Binding| VM(DashboardViewModel)
+    UI["WPF UI Layer<br/>(MainWindow.xaml)"] -->|Data Binding| VM(DashboardViewModel)
     VM -->|Commands| UI
     VM -->|StreamTelemetryAsync| Svc[TelemetryService]
     Svc -->|Reads CSV| Data[(dashBoardData.csv)]
