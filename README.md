@@ -1,18 +1,54 @@
-# real-time-info-dashboard
-This project involves creating a dashboard that represents the status of a fictional manufacturing process.
+# Real-Time Factory Dashboard
 
-We have the status contained in a text file with a day's woth of observations, one per second. Each observation includes a timestamp and the status of a several processes of that time.
+![CI Status](https://github.com/millenniumsingha/real-time-info-dashboard/actions/workflows/ci.yml/badge.svg)
+![.NET Version](https://img.shields.io/badge/.NET-10.0-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-We create a dashboard that shows the status of each processes at the current simulated time.
+A professional, high-performance WPF desktop application designed to visualize factory machine telemetry data in real-time. Built entirely on **.NET 10**, featuring hardware-accelerated charting via **LiveCharts2 (SkiaSharp)** and a robust MVVM architecture using the **CommunityToolkit.Mvvm**.
 
-### Dependency/Dependencies**: - 
-***LiveCharts.Wpf*** [For refecrence - https://github.com/Live-Charts/Live-Charts]
+![Dashboard Preview](docs/images/dashboard.jpg)
 
-## Output
+## 🚀 Key Features
 
-- The Angular Gauge depics the engine efficicency which is near about 80% as displayed.
-- The Step Line Series [Hot Pink] depicts the pulse values with respect to entire duration of file.
-- The Line Series [Black] depics the engine efficiency with respect to entire duration of file.
-- The other variables [red, green, blue] has also been depicted as line series as per the provided data.
+- **Real-Time Data Streaming:** Simulates a live data ingest from factory sensors with asynchronous `IAsyncEnumerable<T>` streaming.
+- **Hardware-Accelerated Charts:** Utilizes SkiaSharp (via LiveCharts2) for flawless, 60FPS 30-second sliding window animations without locking the UI thread.
+- **Precision Custom UI:** Features a pixel-perfect, mathematically computed WPF angular gauge drawn with primitive `<Path>` arcs and `<RotateTransform>` animations for ultimate visual fidelity.
+- **Modern Architecture:** Built on modern C# 14, strictly separating UI from logic with the MVVM pattern and Microsoft Dependency Injection container.
+- **Production-Ready:** Includes a robust `CancellationToken` based fire-and-forget toggle for instant UI feedback, and global crash handlers with UTC-timestamped local logging.
 
-![alt text](https://github.com/Millennium-Heap/real-time-info-dashboard/blob/master/images/dashboard.jpg?raw=true)
+## 🛠️ Tech Stack
+
+- **Framework:** .NET 10.0 Windows Desktop
+- **UI:** WPF (Windows Presentation Foundation)
+- **Architecture:** MVVM (CommunityToolkit.Mvvm), DI (Microsoft.Extensions.DependencyInjection)
+- **Charting:** LiveChartsCore.SkiaSharpView.WPF v2.0.0-rc5.1
+
+## 🏁 Getting Started
+
+### Prerequisites
+- [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+- Visual Studio 2022 (v17.13+) or VS Code with C# Dev Kit
+
+### Build & Run
+```bash
+# Clone the repository
+git clone https://github.com/millenniumsingha/real-time-info-dashboard.git
+cd real-time-info-dashboard
+
+# Build the project
+dotnet build src/Dashboard/Dashboard.csproj -c Release
+
+# Run the application
+dotnet run --project src/Dashboard/Dashboard.csproj -c Release
+```
+
+## 📚 Documentation
+
+See our comprehensive documentation for deep dives into the codebase:
+- [Architecture & Design Decisions](ARCHITECTURE.md) - Explains MVVM setup, LiveCharts2 migration, and custom gauge drawing.
+- [Contributing Guidelines](CONTRIBUTING.md) - How to get involved, our branch strategy, and PR expectations.
+- [Changelog](CHANGELOG.md) - Complete history of versions and upgrades.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
