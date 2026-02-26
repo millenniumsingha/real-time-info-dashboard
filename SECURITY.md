@@ -6,8 +6,7 @@ We currently support the following versions of the Real-Time Factory Dashboard w
 
 | Version | Supported          |
 | ------- | ------------------ |
-| v2.0.x  | :white_check_mark: |
-| v1.0.x  | :x:                |
+| v1.0.x  | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
