@@ -6,7 +6,7 @@
 
 A professional, high-performance WPF desktop application designed to visualize factory machine telemetry data in real-time. Built entirely on **.NET 10**, featuring hardware-accelerated charting via **LiveCharts2 (SkiaSharp)** and a robust MVVM architecture using the **CommunityToolkit.Mvvm**.
 
-![Dashboard Preview](docs/images/dashboard.jpg)
+![Dashboard Preview](docs/images/dashboard.png)
 
 ## 🚀 Key Features
 
