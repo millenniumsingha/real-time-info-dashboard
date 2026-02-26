@@ -1,6 +1,0 @@
-C:\codeClinic_c_sharp\realTimeInfo\Data\bin\Debug\Data.dll
-C:\codeClinic_c_sharp\realTimeInfo\Data\bin\Debug\Data.pdb
-C:\codeClinic_c_sharp\realTimeInfo\Data\obj\Debug\Data.csprojAssemblyReference.cache
-C:\codeClinic_c_sharp\realTimeInfo\Data\obj\Debug\Data.csproj.CoreCompileInputs.cache
-C:\codeClinic_c_sharp\realTimeInfo\Data\obj\Debug\Data.dll
-C:\codeClinic_c_sharp\realTimeInfo\Data\obj\Debug\Data.pdb

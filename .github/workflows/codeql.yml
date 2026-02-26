@@ -1,0 +1,45 @@
+name: "CodeQL Advanced"
+
+on:
+  push:
+    branches: [ "master", "phase/*" ]
+  pull_request:
+    branches: [ "master", "phase/*" ]
+  schedule:
+    - cron: '20 4 * * 0'
+
+jobs:
+  analyze:
+    name: Analyze C#
+    runs-on: windows-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp' ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ matrix.language }}
+
+    - name: Setup .NET 10
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+
+    - name: Build Project
+      run: dotnet build src/Dashboard/Dashboard.csproj -c Release --no-incremental
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{matrix.language}}"
