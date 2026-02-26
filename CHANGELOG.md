@@ -7,34 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-- Comprehensive architecture documentation (`ARCHITECTURE.md`)
-- Official changelog (`CHANGELOG.md`)
+_No unreleased changes._
 
-## [2.0.0] - 2026-02-25
-
-### Added
-- **.NET 10 Migration**: Upgraded the entire project from legacy .NET Framework to modern .NET 10 SDK-style projects.
-- **MVVM Architecture**: Introduced `CommunityToolkit.Mvvm` and Microsoft Dependency Injection for a clean separation of concerns.
-- **CI/CD Integration**: Added GitHub Actions workflow (`ci.yml`) for automated builds on Windows and automated dependency management via `dependabot.yml`.
-- **Global Error Handling**: Added unhandled exception logging for App, TaskScheduler, and CurrentDomain to ensure robust telemetry on crashes.
-
-### Changed
-- **Dependency Update**: Migrated from legacy `LiveCharts.Wpf` v0.9.7 to modern `LiveChartsCore.SkiaSharpView.WPF` v2.0.0-rc5.1.
-- Project restructuring: Unified the legacy `Data` and `Dashboard` projects into a single clean `src/Dashboard` directory.
-- `TelemetryService` now streams data using `IAsyncEnumerable<T>`, yielding results asynchronously over a 50ms interval rather than spinning a blocking thread.
+## [1.0.1] - 2026-02-26
 
 ### Fixed
-- Fixed an issue in `FactoryTelemetry` CSV parsing where parsing failed silently in locales that use commas for decimals by enforcing `CultureInfo.InvariantCulture`.
-- Resolved `DirectoryNotFoundException` crashes when reading the telemetry CSV by mapping file paths to `AppDomain.CurrentDomain.BaseDirectory`.
+- **Dependabot NuGet Mismatch**: Pinned all LiveCharts packages to `2.0.0-rc5.1` to resolve a fatal `MissingMethodException` caused by a partial version bump (`LiveChartsCore` at `rc6.1` vs `LiveChartsCore.SkiaSharpView.WPF` at `rc5.4`).
+
+### Added
+- **ARM64 Release Target**: Release workflow now builds both `win-x64` and `win-arm64` executables via a GitHub Actions build matrix.
+
+## [1.0.0] - 2026-02-26
+
+### Added
+- **.NET 10 Migration**: Upgraded the entire project from legacy .NET Framework 4.7.2 to modern .NET 10 SDK-style projects.
+- **MVVM Architecture**: Introduced `CommunityToolkit.Mvvm` and Microsoft Dependency Injection for a clean separation of concerns.
+- **LiveCharts2 Integration**: Replaced legacy `LiveCharts.Wpf` v0.9.7 with hardware-accelerated `LiveChartsCore.SkiaSharpView.WPF` v2.0.0-rc5.1 powered by SkiaSharp.
+- **Custom Angular Gauge**: Engineered a pixel-perfect, pure-WPF angular gauge using geometric `<Path>` shapes and `<RotateTransform>`.
+- **Async Data Streaming**: `TelemetryService` streams data using `IAsyncEnumerable<T>`, yielding results asynchronously over a 50ms interval.
+- **CI/CD Pipeline**: GitHub Actions workflows for CI (`ci.yml`), CodeQL security scanning (`codeql.yml`), dependency review (`dependency-review.yml`), and automated releases (`release.yml`).
+- **Dependabot**: Automated dependency management via `dependabot.yml`.
+- **Global Error Handling**: Unhandled exception logging for App, TaskScheduler, and CurrentDomain.
+- **Documentation**: `ARCHITECTURE.md` with Mermaid diagrams, `CONTRIBUTING.md`, `SECURITY.md`, issue/PR templates, and a professional `README.md` with CI badges.
+
+### Fixed
+- Fixed CSV parsing failures in non-English locales by enforcing `CultureInfo.InvariantCulture`.
+- Resolved `DirectoryNotFoundException` crashes by mapping file paths to `AppDomain.CurrentDomain.BaseDirectory`.
 - Fixed charting precision loss (empty charts) by converting timestamps from raw Ticks to normalized `TotalSeconds`.
-- Fixed the Start/Stop toggle button unresponsiveness by decoupling state updates from `Task`-based blocking commands using synchronous fire-and-forget.
+- Fixed Start/Stop toggle unresponsiveness by decoupling state updates from `Task`-based blocking commands.
 
 ### Removed
-- Legacy `<package id="..."/>` `packages.config` system eliminated in favor of `PackageReference`.
+- Legacy `packages.config` system eliminated in favor of `PackageReference`.
 - Unused `.vs`, `obj`, and `bin` artifacts permanently removed from tracking via `.gitignore`.
 
-## [1.0.0] - 2018-01-01
+## [0.1.0] - 2018-01-01
 
 ### Added
 - Initial project release using .NET Framework 4.6.1.
